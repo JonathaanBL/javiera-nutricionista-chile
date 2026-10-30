@@ -32,7 +32,11 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<link rel="modulepreload" href="https://unpkg.com/three@0.160.0/build/three.module.js">
+<!-- solo los grosores que usa la página -->
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..400&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --cream:#F3EEE3; --cream-2:#EAE3D3; --ink:#10241B; --green:#1F4D3A; --sage:#8FA98F;
@@ -92,7 +96,10 @@ nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;width
 .btn.sm{padding:11px 18px;font-size:.88rem}
 
 /* hero */
-.hero{min-height:100svh;display:flex;align-items:center;padding:120px 0 80px}
+.hero{min-height:100svh;display:flex;align-items:center;padding:120px 0 80px;position:relative}
+.lite-blob{display:none;position:absolute;z-index:-1;right:6%;top:50%;width:min(40vw,520px);aspect-ratio:1;max-width:100%;translate:0 -50%;border-radius:46% 54% 42% 58%/55% 45% 55% 45%;
+  background:radial-gradient(circle at 35% 30%,#E4F38E 0%,var(--lime) 30%,#5E8F3E 65%,var(--green) 100%);box-shadow:inset -30px -40px 80px rgba(16,36,27,.35),inset 30px 30px 60px rgba(255,255,255,.35);animation:spin 40s linear infinite}
+.lite .lite-blob{display:block}
 .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:24px}
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green);padding:8px 14px;border-radius:999px;background:rgba(200,226,91,.35)}
 .eyebrow b{width:8px;height:8px;border-radius:50%;background:var(--papaya);position:relative}
@@ -113,6 +120,7 @@ h1 em{color:var(--papaya);font-weight:300}
   .hero{align-items:flex-end;padding-bottom:96px}
   .hero .wrap{grid-template-columns:1fr}
   .hero .text{padding-top:24vh}
+  .lite-blob{right:auto;left:50%;top:22vh;width:56vw;translate:-50% -50%}
   .hero .meta{display:none}
 }
 
@@ -277,6 +285,7 @@ footer a{font-weight:600;color:var(--ink)}
         </div>
       </div>
     </div>
+    <div class="lite-blob" aria-hidden="true"></div>
     <div class="scroll-hint" aria-hidden="true">Scroll<i></i></div>
   </header>
 
@@ -494,9 +503,12 @@ import * as THREE from 'three';
 const canvas = document.getElementById('gl');
 const mobile = matchMedia('(max-width:860px)').matches;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+// modo liviano: ahorro de datos o equipo muy básico → forma fija en CSS en vez del 3D
+const lite = navigator.connection?.saveData || navigator.deviceMemory <= 2 || navigator.hardwareConcurrency <= 2;
+const goLite = () => { document.documentElement.classList.add('lite'); canvas.remove(); };
 let renderer;
 try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true }); }
-catch { canvas.remove(); throw new Error('Sin WebGL: la página sigue funcionando sin 3D'); }
+catch { goLite(); throw new Error('Sin WebGL: la página sigue funcionando sin 3D'); }
 renderer.setPixelRatio(Math.min(devicePixelRatio, mobile ? 1.25 : 2));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 
@@ -623,7 +635,7 @@ const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? onS
 document.querySelectorAll('.hero, #sobre, .faq, .ig').forEach(s => io.observe(s));
 
 const clock = new THREE.Clock();
-let tick = 0;
+let tick = 0, last = 0, measured = 0, slow = 0;
 function frame() {
   // en celular basta con 30 fps; sin secciones 3D en pantalla no se dibuja nada
   if (!reduce && (!onScreen.size || (mobile && tick++ % 2))) return requestAnimationFrame(frame);
@@ -648,10 +660,14 @@ function frame() {
   });
   camera.position.x = eased.x * .6; camera.position.y = -eased.y * .4; camera.lookAt(0, 0, 0);
   renderer.render(scene, camera);
+  // si de los primeros 40 cuadros más de la mitad tarda >50 ms (<20 fps), el equipo no da: modo liviano
+  const now = performance.now();
+  if (now - last < 200 && measured < 40) { slow += now - last > 50; if (++measured === 40 && slow > 20) return goLite(); }
+  last = now;
   if (!reduce) requestAnimationFrame(frame);
 }
 // arranca el 3D cuando la portada ya se ve, para no frenar la primera carga
-addEventListener('load', () => setTimeout(frame, 600));
+addEventListener('load', () => lite ? goLite() : setTimeout(frame, 600));
 </script>
 </body>
 </html>
