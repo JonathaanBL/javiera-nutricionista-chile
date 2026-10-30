@@ -5,8 +5,29 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Javiera · Nutricionista</title>
 <meta name="description" content="Nutricionista con mención en Nutrición Deportiva (UBO). Asesorías nutricionales online en todo Chile. Cambia tus hábitos sin dietas extremas.">
+<link rel="canonical" href="https://jonathaanbl.github.io/javiera-nutricionista-chile/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CL">
+<meta property="og:url" content="https://jonathaanbl.github.io/javiera-nutricionista-chile/">
 <meta property="og:title" content="Javiera · Nutricionista">
 <meta property="og:description" content="Asesorías nutricionales online en todo Chile. Nutrición deportiva y cambio de hábitos.">
+<meta property="og:image" content="https://jonathaanbl.github.io/javiera-nutricionista-chile/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"ProfessionalService","name":"Javiera · Nutricionista","url":"https://jonathaanbl.github.io/javiera-nutricionista-chile/","image":"https://jonathaanbl.github.io/javiera-nutricionista-chile/og.png","description":"Asesorías nutricionales online en todo Chile. Nutrición deportiva y cambio de hábitos.","areaServed":{"@type":"Country","name":"Chile"},"sameAs":["https://www.instagram.com/nutricionista.javieralb/"],
+  "founder":{"@type":"Person","name":"Javiera Lopetegui","jobTitle":"Nutricionista","alumniOf":{"@type":"CollegeOrUniversity","name":"Universidad Bernardo O'Higgins"}}},
+ {"@type":"FAQPage","mainEntity":[
+  {"@type":"Question","name":"¿Cómo es la asesoría online?","acceptedAnswer":{"@type":"Answer","text":"Es por videollamada, desde donde estés. Solo necesitas un celular o computador con internet."}},
+  {"@type":"Question","name":"¿Atiendes en todo Chile?","acceptedAnswer":{"@type":"Answer","text":"Sí. Como la atención es online, puedes agendar desde cualquier ciudad de Chile."}},
+  {"@type":"Question","name":"¿Voy a tener que hacer una dieta estricta?","acceptedAnswer":{"@type":"Answer","text":"No. El plan se arma según tus gustos y tu rutina, con cambios realistas que puedas mantener."}},
+  {"@type":"Question","name":"¿Me sirve si hago deporte?","acceptedAnswer":{"@type":"Answer","text":"Sí. Tengo mención en Nutrición Deportiva, así que adaptamos tu alimentación a tu entrenamiento y tus objetivos."}},
+  {"@type":"Question","name":"¿Cuánto cuesta y cómo agendo?","acceptedAnswer":{"@type":"Answer","text":"Escríbeme por mensaje directo en Instagram (@nutricionista.javieralb) y te cuento los planes disponibles y las horas libres."}}
+ ]}
+]}
+</script>
 <meta name="theme-color" content="#10241B">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -180,6 +201,21 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .liters small{font-size:.4em;color:var(--lime)}
 @media (max-width:860px){.calc{grid-template-columns:1fr}}
 
+/* preguntas frecuentes */
+.faq .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,6vw,90px);align-items:start}
+.faq .side{position:sticky;top:120px}
+.faq .side p{color:var(--muted);margin-top:20px;max-width:34ch}
+.faq .side a{color:var(--papaya);font-weight:700}
+.faq details{border-bottom:1px solid rgba(16,36,27,.14)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:26px 0;font-family:Fraunces,serif;font-size:clamp(1.25rem,2.2vw,1.6rem);line-height:1.25}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary i{flex:none;width:40px;height:40px;border-radius:50%;background:rgba(200,226,91,.45);position:relative;transition:transform .4s var(--ease),background .3s}
+.faq summary i::before,.faq summary i::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:2px;margin:-1px 0 0 -7px;background:var(--ink)}
+.faq summary i::after{transform:rotate(90deg)}
+.faq details[open] summary i{transform:rotate(45deg);background:var(--papaya)}
+.faq details p{padding:0 56px 26px 0;color:var(--muted)}
+@media (max-width:860px){.faq .wrap{grid-template-columns:1fr}.faq .side{position:static}.faq details p{padding-right:0}}
+
 /* instagram */
 .ig{text-align:center;padding:160px 0}
 .ig .handle{display:inline-block;font-family:Fraunces,serif;font-style:italic;font-weight:300;font-size:clamp(2rem,7.5vw,6.6rem);line-height:1.05;letter-spacing:-.03em;margin:22px 0 36px;background:linear-gradient(90deg,var(--green),var(--papaya),var(--green));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;transition:background-position .8s var(--ease);word-break:break-word}
@@ -215,7 +251,7 @@ footer a{font-weight:600;color:var(--ink)}
 
 <nav aria-label="Principal">
   <a href="#top" class="logo"><i></i>Javiera<span style="color:var(--papaya)">.</span></a>
-  <div class="links"><a href="#sobre">Sobre mí</a><a href="#servicios">Servicios</a><a href="#proceso">Cómo funciona</a><a href="#agua">Calculadora</a></div>
+  <div class="links"><a href="#sobre">Sobre mí</a><a href="#servicios">Servicios</a><a href="#proceso">Cómo funciona</a><a href="#agua">Calculadora</a><a href="#preguntas">Preguntas</a></div>
   <a class="btn sm" href="https://ig.me/m/nutricionista.javieralb" target="_blank" rel="noopener" data-magnetic>Agenda <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
 </nav>
 
@@ -327,6 +363,23 @@ footer a{font-weight:600;color:var(--ink)}
           <div class="glass" aria-hidden="true"><div class="liquid" id="liquid"><i class="bub" style="left:20%"></i><i class="bub" style="left:55%;animation-delay:1.3s"></i><i class="bub" style="left:75%;animation-delay:2.4s"></i></div></div>
           <div class="liters" aria-live="polite"><span id="lit">2,6</span> <small>litros/día</small></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="preguntas">
+    <div class="wrap">
+      <div class="side">
+        <span class="kicker" data-reveal>Preguntas frecuentes</span>
+        <h2 data-reveal>Lo que todos <em>preguntan.</em></h2>
+        <p data-reveal>¿Tienes otra duda? <a href="https://ig.me/m/nutricionista.javieralb" target="_blank" rel="noopener">Escríbeme por Instagram</a> y te respondo.</p>
+      </div>
+      <div data-reveal>
+        <details><summary>¿Cómo es la asesoría online?<i></i></summary><p>Es por videollamada, desde donde estés. Solo necesitas un celular o computador con internet.</p></details>
+        <details><summary>¿Atiendes en todo Chile?<i></i></summary><p>Sí. Como la atención es online, puedes agendar desde cualquier ciudad de Chile.</p></details>
+        <details><summary>¿Voy a tener que hacer una dieta estricta?<i></i></summary><p>No. El plan se arma según tus gustos y tu rutina, con cambios realistas que puedas mantener.</p></details>
+        <details><summary>¿Me sirve si hago deporte?<i></i></summary><p>Sí. Tengo mención en Nutrición Deportiva, así que adaptamos tu alimentación a tu entrenamiento y tus objetivos.</p></details>
+        <details><summary>¿Cuánto cuesta y cómo agendo?<i></i></summary><p>Escríbeme por mensaje directo en Instagram (@nutricionista.javieralb) y te cuento los planes disponibles y las horas libres.</p></details>
       </div>
     </div>
   </section>
@@ -564,8 +617,14 @@ if (window.gsap && !reduce) {
 const mouse = { x: 0, y: 0 }, eased = { x: 0, y: 0 };
 addEventListener('pointermove', e => { mouse.x = e.clientX / innerWidth - .5; mouse.y = e.clientY / innerHeight - .5; });
 
+// solo se dibuja mientras alguna sección con 3D visible está en pantalla (ahorra batería)
+const onScreen = new Set();
+const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? onScreen.add(e.target) : onScreen.delete(e.target)));
+document.querySelectorAll('.hero, #sobre, .faq, .ig').forEach(s => io.observe(s));
+
 const clock = new THREE.Clock();
 function frame() {
+  if (!reduce && !onScreen.size) return requestAnimationFrame(frame);
   const t = reduce ? 4 : clock.getElapsedTime();
   eased.x += (mouse.x - eased.x) * .05; eased.y += (mouse.y - eased.y) * .05;
   const hh = halfH(), hw = hh * camera.aspect;
